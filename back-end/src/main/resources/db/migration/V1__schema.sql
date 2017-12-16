@@ -1,4 +1,4 @@
-CREATE TABLE articles (
+CREATE TABLE article (
   id SERIAL PRIMARY KEY,
   wp_internal_id BIGINT NOT NULL,
   wp_published_time TIMESTAMP NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE articles (
   slug VARCHAR(110) NOT NULL
 );
 
-CREATE TABLE posts(
+CREATE TABLE post (
   id SERIAL PRIMARY KEY,
   fb_internal_id VARCHAR(35) NOT NULL,
   fb_published_date TIMESTAMP NOT NULL,
