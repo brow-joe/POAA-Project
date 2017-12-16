@@ -12,6 +12,7 @@ open class PostRepository(var dsl: DSLContext) {
 	val logger = LoggerFactory.getLogger(PostRepository::class.java);
 
 	fun findAll(): Result<PostRecord> {
+		logger.info("Find All");
 		return dsl.selectFrom(Post.POST).fetch();
 	}
 

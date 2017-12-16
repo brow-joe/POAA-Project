@@ -25,6 +25,7 @@ open class ArticleRestController : DefaultRestController() {
 	@Produces("application/json")
 	@Consumes("application/json")
 	open fun findAll(): Response {
+		logger.info("GET all articles");
 		var resource = createLink(findAllArticleUseCase.execute(), this);
 		return Response.ok(resource).build();
 	}

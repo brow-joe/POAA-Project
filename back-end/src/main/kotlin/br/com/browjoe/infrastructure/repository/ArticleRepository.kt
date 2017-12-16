@@ -12,6 +12,7 @@ open class ArticleRepository(var dsl: DSLContext) {
 	val logger = LoggerFactory.getLogger(ArticleRepository::class.java);
 
 	fun findAll(): Result<ArticleRecord> {
+		logger.info("Find all");
 		return dsl.selectFrom(Article.ARTICLE).fetch();
 	}
 

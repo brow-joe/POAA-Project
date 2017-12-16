@@ -25,6 +25,7 @@ open class PostRestController : DefaultRestController() {
 	@Produces("application/json")
 	@Consumes("application/json")
 	open fun findAll(): Response {
+		logger.info("GET all posts");
 		var resource = createLink(findAllPostUseCase.execute(), this);
 		return Response.ok(resource).build();
 	}
