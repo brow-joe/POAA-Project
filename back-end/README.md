@@ -1,5 +1,5 @@
 # Project-POAA
-Posts Of About Articles - La Mente es Maravillosa
+Posts About Articles - La Mente es Maravillosa
 
 ## Back-end
 
@@ -21,4 +21,4 @@ Posts Of About Articles - La Mente es Maravillosa
 * [Java JDK8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html) *(version 1.8.0_151)* as Development Kit
 * [Kotlin](https://kotlinlang.org/docs/reference/using-gradle.html) *(version 1.2.10)* as programming language
 * [Spring Boot](https://projects.spring.io/spring-boot/) *(version 1.5.9.RELEASE)* as framework applications based in microservices
-* [Spring Cloud](http://projects.spring.io/spring-cloud/) *(version Dalston.SR4)* as framework applications based in distributed applications tools
+* [Spring Cloud](http://projects.spring.io/spring-cloud/) *(version Dalston.SR4)* as framework based in distributed applications tools
