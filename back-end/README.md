@@ -25,7 +25,7 @@ Posts About Articles - La Mente es Maravillosa
 
 ### Dependencies
 * [Jersey](https://jersey.github.io/) as framework standard JAX-RS API for java
-* [Hateoas](http://projects.spring.io/spring-hateoas/) as Driven REST APIs
+* [Hateoas](http://projects.spring.io/spring-hateoas/) as response standard REST APIs
 * [Log4j2](https://logging.apache.org/log4j/2.x/) is a framework to control logs
-* [Spring-Boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) is a tool for developing web applications
+* [Spring-Boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) is a tool for developing web-applications
 * [JUnit](http://junit.org/junit5/) is a tool for applications tests
