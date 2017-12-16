@@ -89,7 +89,7 @@ flyway {
 	password = "${jdbcPassword}"
 }
 
-task jooqGenerate << {
+task jooqGenerate {
 	def writer = new StringWriter()
 	def xml = new groovy.xml.MarkupBuilder(writer)
 	.configuration("xmlns": "http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd") {
