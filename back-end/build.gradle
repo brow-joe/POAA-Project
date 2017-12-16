@@ -4,6 +4,7 @@ buildscript {
 		jdbcUrl = "jdbc:postgresql://localhost:5432/lamenteesmaravillosa"
 		jdbcUser = "postgres"
 		jdbcPassword = "postgres"
+		kotlinVersion = "1.2.10"
 	}
 	repositories {
 		mavenLocal()
@@ -12,15 +13,17 @@ buildscript {
 		maven { url "https://repo.spring.io/snapshot" }
 		maven { url "https://repo.spring.io/milestone" }
 		maven { url "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-    	classpath "gradle.plugin.com.boxfuse.client:flyway-release:5.0.2"
-    	classpath "org.jooq:jooq-codegen:${jooqVersion}"
-    	classpath "org.postgresql:postgresql:42.1.4"
-    }
+	}
+	dependencies {
+		classpath "gradle.plugin.com.boxfuse.client:flyway-release:5.0.2"
+		classpath "org.jooq:jooq-codegen:${jooqVersion}"
+		classpath "org.postgresql:postgresql:42.1.4"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+	}
 }
 
 apply plugin: "java"
+apply plugin: "kotlin"
 apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "org.flywaydb.flyway"
@@ -32,7 +35,7 @@ targetCompatibility = 1.8
 
 jar {
 	baseName = "poaa-back-end"
-	version =  "0.0.1-SNAPSHOT"
+	version = "0.0.1-SNAPSHOT"
 }
 
 repositories {
@@ -46,12 +49,17 @@ repositories {
 sourceSets {
 	main.java.srcDirs += "src/main/java"
 	test.java.srcDirs += "src/test/java"
+	main.kotlin.srcDirs += "src/main/kotlin"
+	test.kotlin.srcDirs += "src/test/kotlin"
 }
 
 dependencies {
 	compile "org.jooq:jooq:${jooqVersion}"
 	compile "org.jooq:jooq-meta:${jooqVersion}"
 	compile "org.jooq:jooq-codegen:${jooqVersion}"
+	
+	compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+	testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
 }
 
 flyway {

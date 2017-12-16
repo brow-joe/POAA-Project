@@ -19,3 +19,4 @@ Posts Of About Articles - La Mente es Maravillosa
 * [PostgreSQL](https://www.postgresql.org/) *(version 10.1)* as database
 * [Java JRE8](http://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html) *(version 1.8.0_151)* as virtual machine
 * [Java JDK8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html) *(version 1.8.0_151)* as Development Kit
+* [Kotlin](https://kotlinlang.org/docs/reference/using-gradle.html) *(version 1.2.10)* as programming language
