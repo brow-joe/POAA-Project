@@ -75,6 +75,7 @@ dependencies {
 	compile "org.jooq:jooq-codegen:${jooqVersion}"
 	
 	compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+	compile "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
 	
 	compile ("org.springframework.boot:spring-boot-starter-web") {
