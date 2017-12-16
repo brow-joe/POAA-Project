@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet-path: /api/v1
+spring:
+  jersey:
+    application-path: /api/v1
+  main:
+    show_banner: false
+    banner-mode: 'off'
+  application:
+    name: poaaservice
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/lamenteesmaravillosa
+    username: postgres
+    password: postgres
+    initialize: false
+    continueOnError: true
+  jooq:
+    sql-dialect: POSTGRES
