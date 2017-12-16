@@ -1,4 +1,10 @@
 buildscript {
+	ext {
+		jooqVersion = "3.10.0"
+		jdbcUrl = "jdbc:postgresql://localhost:5432/poaaTestDB"
+		jdbcUser = "postgres"
+		jdbcPassword = "postgres"
+	}
 	repositories {
 		mavenLocal()
 		mavenCentral()
@@ -6,19 +12,80 @@ buildscript {
 		maven { url "https://repo.spring.io/snapshot" }
 		maven { url "https://repo.spring.io/milestone" }
 		maven { url "https://plugins.gradle.org/m2/" }
-	}
-	dependencies {
-		classpath "gradle.plugin.com.boxfuse.client:flyway-release:5.0.2"
-		classpath "org.postgresql:postgresql:42.1.4"
-	}
+    }
+    dependencies {
+    	classpath "gradle.plugin.com.boxfuse.client:flyway-release:5.0.2"
+    	classpath "org.jooq:jooq-codegen:${jooqVersion}"
+    	classpath "org.postgresql:postgresql:42.1.4"
+    }
 }
 
+apply plugin: "java"
 apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "org.flywaydb.flyway"
 
+group = "br.com.jonathan"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+	baseName = "poaa-back-end"
+	version =  "0.0.1-SNAPSHOT"
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	jcenter()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+sourceSets {
+	main.java.srcDirs += "src/main/java"
+	test.java.srcDirs += "src/test/java"
+}
+
+dependencies {
+	compile "org.jooq:jooq:${jooqVersion}"
+	compile "org.jooq:jooq-meta:${jooqVersion}"
+	compile "org.jooq:jooq-codegen:${jooqVersion}"
+}
+
 flyway {
-	url = "jdbc:postgresql://localhost:5432/flywaytest"
-	user = "postgres"
-	password = "postgres"
+	url = "${jdbcUrl}"
+	user = "${jdbcUser}"
+	password = "${jdbcPassword}"
+}
+
+task jooqGenerate << {
+	def writer = new StringWriter()
+	def xml = new groovy.xml.MarkupBuilder(writer)
+	.configuration("xmlns": "http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd") {
+		jdbc() {
+			driver("org.postgresql.Driver")
+			url("${jdbcUrl}")
+			user("${jdbcUser}")
+			password("${jdbcPassword}")
+		}
+		generator() {
+			database() {
+				name("org.jooq.util.postgres.PostgresDatabase")
+				inputSchema("public")
+				includes(".*")
+			}
+			generate([:]) {
+				records true
+			}
+			target() {
+				packageName("br.com.jooq.data")
+				directory("src/main/java")
+			}
+		}
+	}
+	org.jooq.util.GenerationTool.generate (
+		javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+	)
 }

@@ -79,3 +79,4 @@ atlassian-ide-plugin.xml
 /intTestHomeDir
 /*.log
 .gradletasknamecache
+/src/main/java

@@ -1,4 +1,4 @@
-CREATE TABLE test (
+CREATE TABLE poaa (
   id BIGINT PRIMARY KEY,
-  test VARCHAR(255)
+  uuid TEXT
 );
