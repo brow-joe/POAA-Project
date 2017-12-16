@@ -1,0 +1,24 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		jcenter()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+		classpath "gradle.plugin.com.boxfuse.client:flyway-release:5.0.2"
+		classpath "org.postgresql:postgresql:42.1.4"
+	}
+}
+
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "org.flywaydb.flyway"
+
+flyway {
+	url = "jdbc:postgresql://localhost:5432/flywaytest"
+	user = "postgres"
+	password = "postgres"
+}
