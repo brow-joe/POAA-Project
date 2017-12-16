@@ -10,6 +10,7 @@ Posts About Articles - La Mente es Maravillosa
 * Step 2 - Create database
 * Step 3 - Build the gradle flyway `gradle flywayMigrate -i`
 * Step 4 - Build the gradle jooq codegen `gradle clean jooqGenerate -i`
+* Step 5 - Build the gradle api `gradle clean build`
 
 ### Technologies
 * [Git](https://git-scm.com/) *(version 2.15.1)* as control version
