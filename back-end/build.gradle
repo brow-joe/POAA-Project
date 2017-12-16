@@ -5,6 +5,7 @@ buildscript {
 		jdbcUser = "postgres"
 		jdbcPassword = "postgres"
 		kotlinVersion = "1.2.10"
+		springBootVersion = "1.5.9.RELEASE"
 	}
 	repositories {
 		mavenLocal()
@@ -19,6 +20,7 @@ buildscript {
 		classpath "org.jooq:jooq-codegen:${jooqVersion}"
 		classpath "org.postgresql:postgresql:42.1.4"
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 	}
 }
 
@@ -27,11 +29,20 @@ apply plugin: "kotlin"
 apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "org.flywaydb.flyway"
+apply plugin: "org.springframework.boot"
 
-group = "br.com.jonathan"
+group = "br.com.browjoe"
 version = "0.0.1-SNAPSHOT"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+bootRepackage {
+	mainClass = "br.com.browjoe.ApplicationStartUpKt"
+}
+
+bootRun {
+	addResources = true
+}
 
 jar {
 	baseName = "poaa-back-end"
@@ -53,6 +64,10 @@ sourceSets {
 	test.kotlin.srcDirs += "src/test/kotlin"
 }
 
+ext {
+	springCloudVersion = "Dalston.SR4"
+}
+
 dependencies {
 	compile "org.jooq:jooq:${jooqVersion}"
 	compile "org.jooq:jooq-meta:${jooqVersion}"
@@ -60,6 +75,12 @@ dependencies {
 	
 	compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 flyway {
@@ -88,7 +109,7 @@ task jooqGenerate << {
 				records true
 			}
 			target() {
-				packageName("br.com.jooq.data")
+				packageName("br.com.browjoe.jooq.data")
 				directory("src/main/java")
 			}
 		}
