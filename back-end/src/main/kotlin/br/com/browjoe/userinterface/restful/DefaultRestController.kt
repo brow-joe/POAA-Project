@@ -5,8 +5,8 @@ import org.springframework.hateoas.jaxrs.JaxRsLinkBuilder
 
 open class DefaultRestController {
 
-	open fun <T> createLink(content: T, controller: Class<Any>): DataResource<T> {
-		val link = JaxRsLinkBuilder.linkTo(controller).withSelfRel();
+	open fun <T, C : Any> createLink(content: T, controller: C): DataResource<T> {
+		val link = JaxRsLinkBuilder.linkTo(controller::class.java).withSelfRel();
 		var resource = DataResource(content);
 		resource.add(link);
 		return resource;
