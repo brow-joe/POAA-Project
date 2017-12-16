@@ -1,7 +1,7 @@
 buildscript {
 	ext {
 		jooqVersion = "3.10.0"
-		jdbcUrl = "jdbc:postgresql://localhost:5432/poaaTestDB"
+		jdbcUrl = "jdbc:postgresql://localhost:5432/lamenteesmaravillosa"
 		jdbcUser = "postgres"
 		jdbcPassword = "postgres"
 	}
