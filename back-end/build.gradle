@@ -30,6 +30,7 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "org.flywaydb.flyway"
 apply plugin: "org.springframework.boot"
+apply plugin: "war"
 
 group = "br.com.browjoe"
 version = "0.0.1-SNAPSHOT"
@@ -75,6 +76,26 @@ dependencies {
 	
 	compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
+	
+	compile ("org.springframework.boot:spring-boot-starter-web") {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	compile "org.springframework.boot:spring-boot-starter-undertow"
+	providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+	compile "org.springframework.boot:spring-boot-starter-jersey"
+	compile "org.springframework.boot:spring-boot-starter-hateoas"
+	compile "org.springframework.boot:spring-boot-starter-jooq"
+	compile "org.postgresql:postgresql"
+	
+	compile "org.springframework.boot:spring-boot-starter-log4j2"
+	runtime "org.springframework.boot:spring-boot-devtools"
+	
+	testCompile "org.springframework.boot:spring-boot-starter-test"
+	testCompile "junit:junit"
+}
+
+configurations.all {
+	exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
 }
 
 dependencyManagement {
