@@ -1,0 +1,23 @@
+{
+	"Configuration": {
+		"Appenders": {
+			"Console": {
+				"PatternLayout": {
+					"pattern": "${hostName} - %d{dd/MM/yyyy HH:mm:ss} %-5p [%c:%L] - %m%n"
+				},
+				"name": "Console",
+				"target": "SYSTEM_OUT"
+			}
+		},
+		"Loggers": {
+			"Root": {
+				"AppenderRef": [
+					{
+						"ref": "Console"
+					}
+				],
+				"level": "info"
+			}
+		}
+	}
+}
