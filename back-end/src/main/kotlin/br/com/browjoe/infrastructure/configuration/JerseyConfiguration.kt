@@ -5,15 +5,16 @@ import br.com.browjoe.userinterface.restful.PostRestController
 import org.glassfish.jersey.server.ResourceConfig
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Configuration
+import java.util.Arrays
 
 @Configuration
 open class JerseyConfiguration : ResourceConfig() {
 	val logger = LoggerFactory.getLogger(JerseyConfiguration::class.java);
+	val controllers = Arrays.asList(ArticleRestController::class.java, PostRestController::class.java);
 
 	init {
-		logger.info("Register all controllers");
-		register(ArticleRestController::class.java);
-		register(PostRestController::class.java);
+		logger.info("Register controllers={}", controllers);
+		controllers.forEach { register(it) };
 	}
 
 }
