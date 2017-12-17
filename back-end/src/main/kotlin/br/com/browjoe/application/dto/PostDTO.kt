@@ -5,6 +5,21 @@ import java.sql.Timestamp
 import java.util.Date
 import javax.xml.bind.annotation.XmlRootElement
 
+/**
+ * @see json:
+
+{"id": 0,
+"internalId": "",
+"published": 1513523431153,
+"title": "",
+"link": "",
+"description": "",
+"likes": 0,
+"shares": 0,
+"comments": 0,
+"consumptions": 0}
+
+ */
 @XmlRootElement
 data class PostDTO(
 		var id: Int? = 0,
