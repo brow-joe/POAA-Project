@@ -10,10 +10,21 @@ import org.springframework.stereotype.Service
 @Service
 open class PostRepository(var dsl: DSLContext) {
 	val logger = LoggerFactory.getLogger(PostRepository::class.java);
+	val table = Post.POST;
 
 	fun findAll(): Result<PostRecord> {
 		logger.info("Find All");
-		return dsl.selectFrom(Post.POST).fetch();
+		return dsl.selectFrom(table).fetch();
+	}
+
+	fun findById(id: Int): PostRecord {
+		logger.info("Find by id={}", id);
+		return dsl.selectFrom(table).where(table.ID.eq(id)).fetchOne();
+	}
+
+	fun save(post: PostRecord): Int {
+		logger.info("Create={}", post);
+		return dsl.insertInto(table).set(post).execute();
 	}
 
 }

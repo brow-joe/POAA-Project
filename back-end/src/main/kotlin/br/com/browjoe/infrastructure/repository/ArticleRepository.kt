@@ -10,10 +10,21 @@ import org.springframework.stereotype.Service
 @Service
 open class ArticleRepository(var dsl: DSLContext) {
 	val logger = LoggerFactory.getLogger(ArticleRepository::class.java);
+	val table = Article.ARTICLE;
 
 	fun findAll(): Result<ArticleRecord> {
 		logger.info("Find all");
-		return dsl.selectFrom(Article.ARTICLE).fetch();
+		return dsl.selectFrom(table).fetch();
+	}
+
+	fun findById(id: Int): ArticleRecord {
+		logger.info("Find by id={}", id);
+		return dsl.selectFrom(table).where(table.ID.eq(id)).fetchOne();
+	}
+
+	fun save(article: ArticleRecord): Int {
+		logger.info("Create={}", article);
+		return dsl.insertInto(table).set(article).execute();
 	}
 
 }

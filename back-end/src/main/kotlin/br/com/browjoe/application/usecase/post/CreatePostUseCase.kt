@@ -5,14 +5,17 @@ import br.com.browjoe.application.translator.PostTranslator
 import br.com.browjoe.infrastructure.repository.PostRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 open class CreatePostUseCase(var translator: PostTranslator, var repository: PostRepository) {
 	val logger = LoggerFactory.getLogger(CreatePostUseCase::class.java);
 
+	@Transactional
 	fun execute(post: PostDTO): PostDTO {
 		logger.info("Create post={}", post);
-		return post;
+		var id = repository.save(translator.translate(post));
+		return translator.translate(repository.findById(id));
 	}
 
 }
