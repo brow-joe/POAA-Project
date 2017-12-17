@@ -1,6 +1,7 @@
 package br.com.browjoe.userinterface.restful
 
 import br.com.browjoe.application.dto.ArticleDTO
+import br.com.browjoe.application.usecase.article.CreateArticleUseCase
 import br.com.browjoe.application.usecase.article.DeleteArticleByIdUseCase
 import br.com.browjoe.application.usecase.article.FindAllArticleUseCase
 import br.com.browjoe.application.usecase.article.FindArticleByIdUseCase
@@ -30,6 +31,8 @@ open class ArticleRestController : DefaultRestController() {
 	lateinit var findArticleByIdUseCase: FindArticleByIdUseCase;
 	@Inject
 	lateinit var deleteArticleByIdUseCase: DeleteArticleByIdUseCase;
+	@Inject
+	lateinit var createArticleUseCase: CreateArticleUseCase;
 
 	@GET
 	@Path("/")
@@ -64,7 +67,8 @@ open class ArticleRestController : DefaultRestController() {
 	@Consumes("application/json")
 	open fun save(article: ArticleDTO): Response {
 		logger.info("Save article={}", article);
-		return Response.ok().build();
+		var resource = createLink(createArticleUseCase.execute(article), this);
+		return Response.ok(resource).build();
 	}
 
 	@PUT

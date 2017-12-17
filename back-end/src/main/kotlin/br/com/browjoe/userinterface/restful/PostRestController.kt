@@ -1,6 +1,7 @@
 package br.com.browjoe.userinterface.restful
 
 import br.com.browjoe.application.dto.PostDTO
+import br.com.browjoe.application.usecase.post.CreatePostUseCase
 import br.com.browjoe.application.usecase.post.DeletePostByIdUseCase
 import br.com.browjoe.application.usecase.post.FindAllPostUseCase
 import br.com.browjoe.application.usecase.post.FindPostByIdUseCase
@@ -30,6 +31,8 @@ open class PostRestController : DefaultRestController() {
 	lateinit var findPostByIdUseCase: FindPostByIdUseCase;
 	@Inject
 	lateinit var deletePostByIdUseCase: DeletePostByIdUseCase;
+	@Inject
+	lateinit var createPostUseCase: CreatePostUseCase;
 
 	@GET
 	@Path("/")
@@ -64,7 +67,8 @@ open class PostRestController : DefaultRestController() {
 	@Consumes("application/json")
 	open fun save(post: PostDTO): Response {
 		logger.info("Save post={}", post);
-		return Response.ok().build();
+		var resource = createLink(createPostUseCase.execute(post), this);
+		return Response.ok(resource).build();
 	}
 
 	@PUT
