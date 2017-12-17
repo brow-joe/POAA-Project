@@ -13,6 +13,7 @@ import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.PUT
 import javax.ws.rs.Path
+import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.Response
 
@@ -39,7 +40,7 @@ open class PostRestController : DefaultRestController() {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	open fun findById(id: Int): Response {
+	open fun findById(@PathParam("id") id: Int): Response {
 		logger.info("GET by id={}", id);
 		var resource = createLink(findPostByIdUseCase.execute(id), this);
 		return Response.ok(resource).build();
@@ -48,7 +49,7 @@ open class PostRestController : DefaultRestController() {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
-	open fun deleteById(id: Int): Response {
+	open fun deleteById(@PathParam("id") id: Int): Response {
 		logger.info("DELETE by id={}", id);
 		return Response.ok().build();
 	}
@@ -66,7 +67,7 @@ open class PostRestController : DefaultRestController() {
 	@Path("/{id}")
 	@Produces("application/json")
 	@Consumes("application/json")
-	open fun update(id: Int, post: PostDTO): Response {
+	open fun update(@PathParam("id") id: Int, post: PostDTO): Response {
 		logger.info("Update by id={}, post={}", id, post);
 		return Response.ok().build();
 	}
