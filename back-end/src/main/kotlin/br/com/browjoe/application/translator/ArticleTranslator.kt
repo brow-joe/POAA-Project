@@ -19,4 +19,8 @@ open class ArticleTranslator {
 		return ArticleDTO(record.value1(), record.value2(), record.value3(), record.value4(), record.value5());
 	}
 
+	fun translate(article: ArticleDTO): ArticleRecord {
+		return ArticleRecord(article.id, article.internalId, article.published, article.title, article.slug);
+	}
+
 }

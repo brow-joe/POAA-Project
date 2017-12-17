@@ -25,4 +25,14 @@ open class PostTranslator {
 		);
 	}
 
+	fun translate(post: PostDTO): PostRecord {
+		return PostRecord(
+				post.id, post.internalId,
+				post.published, post.title,
+				post.link, post.description,
+				post.likes, post.shares,
+				post.comments, post.consumptions
+		);
+	}
+
 }
