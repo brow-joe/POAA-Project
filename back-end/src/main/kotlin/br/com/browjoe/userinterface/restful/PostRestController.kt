@@ -5,6 +5,7 @@ import br.com.browjoe.application.usecase.post.CreatePostUseCase
 import br.com.browjoe.application.usecase.post.DeletePostByIdUseCase
 import br.com.browjoe.application.usecase.post.FindAllPostUseCase
 import br.com.browjoe.application.usecase.post.FindPostByIdUseCase
+import br.com.browjoe.application.usecase.post.UpdatePostUseCase
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -33,6 +34,8 @@ open class PostRestController : DefaultRestController() {
 	lateinit var deletePostByIdUseCase: DeletePostByIdUseCase;
 	@Inject
 	lateinit var createPostUseCase: CreatePostUseCase;
+	@Inject
+	lateinit var updatePostUseCase: UpdatePostUseCase;
 
 	@GET
 	@Path("/")
@@ -77,7 +80,8 @@ open class PostRestController : DefaultRestController() {
 	@Consumes("application/json")
 	open fun update(@PathParam("id") id: Int, post: PostDTO): Response {
 		logger.info("Update by id={}, post={}", id, post);
-		return Response.ok().build();
+		var resource = createLink(updatePostUseCase.execute(id, post), this);
+		return Response.ok(resource).build();
 	}
 
 }

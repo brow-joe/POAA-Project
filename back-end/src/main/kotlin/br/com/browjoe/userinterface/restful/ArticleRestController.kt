@@ -5,6 +5,7 @@ import br.com.browjoe.application.usecase.article.CreateArticleUseCase
 import br.com.browjoe.application.usecase.article.DeleteArticleByIdUseCase
 import br.com.browjoe.application.usecase.article.FindAllArticleUseCase
 import br.com.browjoe.application.usecase.article.FindArticleByIdUseCase
+import br.com.browjoe.application.usecase.article.UpdateArticleUseCase
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -33,6 +34,8 @@ open class ArticleRestController : DefaultRestController() {
 	lateinit var deleteArticleByIdUseCase: DeleteArticleByIdUseCase;
 	@Inject
 	lateinit var createArticleUseCase: CreateArticleUseCase;
+	@Inject
+	lateinit var updateArticleUseCase: UpdateArticleUseCase;
 
 	@GET
 	@Path("/")
@@ -77,7 +80,8 @@ open class ArticleRestController : DefaultRestController() {
 	@Consumes("application/json")
 	open fun update(@PathParam("id") id: Int, article: ArticleDTO): Response {
 		logger.info("Update by id={}, article={}", id, article);
-		return Response.ok().build();
+		var resource = createLink(updateArticleUseCase.execute(id, article), this);
+		return Response.ok(resource).build();
 	}
 
 }
