@@ -32,4 +32,9 @@ open class ArticleRepository(var dsl: DSLContext) {
 		dsl.deleteFrom(table).where(table.ID.eq(id)).execute();
 	}
 
+	fun update(article: ArticleRecord): ArticleRecord {
+		logger.info("Update={}", article);
+		return dsl.update(table).set(article).returning().fetchOne();
+	}
+
 }

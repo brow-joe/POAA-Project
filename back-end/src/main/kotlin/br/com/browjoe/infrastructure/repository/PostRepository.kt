@@ -32,4 +32,9 @@ open class PostRepository(var dsl: DSLContext) {
 		dsl.deleteFrom(table).where(table.ID.eq(id)).execute();
 	}
 
+	fun update(post: PostRecord): PostRecord {
+		logger.info("Update={}", post);
+		return dsl.update(table).set(post).returning().fetchOne();
+	}
+
 }
