@@ -1,6 +1,7 @@
 package br.com.browjoe.userinterface.restful
 
 import br.com.browjoe.application.dto.ArticleDTO
+import br.com.browjoe.application.usecase.article.DeleteArticleByIdUseCase
 import br.com.browjoe.application.usecase.article.FindAllArticleUseCase
 import br.com.browjoe.application.usecase.article.FindArticleByIdUseCase
 import org.slf4j.LoggerFactory
@@ -27,6 +28,8 @@ open class ArticleRestController : DefaultRestController() {
 	lateinit var findAllArticleUseCase: FindAllArticleUseCase;
 	@Inject
 	lateinit var findArticleByIdUseCase: FindArticleByIdUseCase;
+	@Inject
+	lateinit var deleteArticleByIdUseCase: DeleteArticleByIdUseCase;
 
 	@GET
 	@Path("/")
@@ -51,6 +54,7 @@ open class ArticleRestController : DefaultRestController() {
 	@Produces("application/json")
 	open fun deleteById(@PathParam("id") id: Int): Response {
 		logger.info("DELETE by id={}", id);
+		deleteArticleByIdUseCase.execute(id);
 		return Response.ok().build();
 	}
 
