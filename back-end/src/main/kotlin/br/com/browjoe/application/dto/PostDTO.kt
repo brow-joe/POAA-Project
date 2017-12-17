@@ -2,7 +2,6 @@ package br.com.browjoe.application.dto
 
 import java.io.Serializable
 import java.sql.Timestamp
-import java.util.Date
 import javax.xml.bind.annotation.XmlRootElement
 
 /**
@@ -22,14 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement
  */
 @XmlRootElement
 data class PostDTO(
-		var id: Int? = 0,
-		val internalId: String? = "",
-		val published: Timestamp? = Timestamp(Date().getTime()),
-		val title: String? = "",
-		val link: String? = "",
-		val description: String? = "",
-		val likes: Int? = 0,
-		val shares: Int? = 0,
-		val comments: Int? = 0,
-		val consumptions: Int? = 0
+		var id: Int? = null,
+		val internalId: String? = null,
+		val published: Timestamp? = null,
+		val title: String? = null,
+		val link: String? = null,
+		val description: String? = null,
+		val likes: Int? = null,
+		val shares: Int? = null,
+		val comments: Int? = null,
+		val consumptions: Int? = null
 ) : Serializable
