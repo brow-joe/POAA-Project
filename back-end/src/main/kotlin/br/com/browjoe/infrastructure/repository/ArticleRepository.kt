@@ -27,4 +27,9 @@ open class ArticleRepository(var dsl: DSLContext) {
 		return dsl.insertInto(table).set(article).execute();
 	}
 
+	fun delete(id: Int) {
+		logger.info("Delete by id={}", id);
+		dsl.deleteFrom(table).where(table.ID.eq(id)).execute();
+	}
+
 }
