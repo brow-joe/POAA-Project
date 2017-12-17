@@ -2,6 +2,7 @@ package br.com.browjoe.userinterface.restful
 
 import br.com.browjoe.application.dto.PostDTO
 import br.com.browjoe.application.usecase.post.FindAllPostUseCase
+import br.com.browjoe.application.usecase.post.FindPostByIdUseCase
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -23,11 +24,12 @@ open class PostRestController : DefaultRestController() {
 
 	@Inject
 	lateinit var findAllPostUseCase: FindAllPostUseCase;
+	@Inject
+	lateinit var findPostByIdUseCase: FindPostByIdUseCase;
 
 	@GET
 	@Path("/")
 	@Produces("application/json")
-	@Consumes("application/json")
 	open fun findAll(): Response {
 		logger.info("GET all posts");
 		var resource = createLink(findAllPostUseCase.execute(), this);
@@ -37,16 +39,15 @@ open class PostRestController : DefaultRestController() {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	@Consumes("application/json")
 	open fun findById(id: Int): Response {
 		logger.info("GET by id={}", id);
-		return Response.ok().build();
+		var resource = createLink(findPostByIdUseCase.execute(id), this);
+		return Response.ok(resource).build();
 	}
 
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
-	@Consumes("application/json")
 	open fun deleteById(id: Int): Response {
 		logger.info("DELETE by id={}", id);
 		return Response.ok().build();
