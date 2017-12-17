@@ -61,7 +61,8 @@ open class ArticleRestController : DefaultRestController() {
 	open fun deleteById(@PathParam("id") id: Int): Response {
 		logger.info("DELETE by id={}", id);
 		deleteArticleByIdUseCase.execute(id);
-		return Response.ok().build();
+		var resource = createLink(this);
+		return Response.ok(resource).build();
 	}
 
 	@POST
