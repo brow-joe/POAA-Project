@@ -22,9 +22,9 @@ open class ArticleRepository(var dsl: DSLContext) {
 		return dsl.selectFrom(table).where(table.ID.eq(id)).fetchOne();
 	}
 
-	fun save(article: ArticleRecord): Int {
+	fun save(article: ArticleRecord): ArticleRecord {
 		logger.info("Create={}", article);
-		return dsl.insertInto(table).set(article).execute();
+		return dsl.insertInto(table).set(article).returning().fetchOne();
 	}
 
 	fun delete(id: Int) {

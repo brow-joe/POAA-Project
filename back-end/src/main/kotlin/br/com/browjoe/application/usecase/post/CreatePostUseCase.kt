@@ -14,8 +14,7 @@ open class CreatePostUseCase(var translator: PostTranslator, var repository: Pos
 	@Transactional
 	fun execute(post: PostDTO): PostDTO {
 		logger.info("Create post={}", post);
-		var id = repository.save(translator.translate(post));
-		return translator.translate(repository.findById(id));
+		return translator.translate(repository.save(translator.translate(post)));
 	}
 
 }

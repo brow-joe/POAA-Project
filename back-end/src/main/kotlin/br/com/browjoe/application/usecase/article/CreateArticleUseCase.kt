@@ -14,8 +14,7 @@ open class CreateArticleUseCase(var translator: ArticleTranslator, var repositor
 	@Transactional
 	fun execute(article: ArticleDTO): ArticleDTO {
 		logger.info("Create article={}", article);
-		var id = repository.save(translator.translate(article));
-		return translator.translate(repository.findById(id));
+		return translator.translate(repository.save(translator.translate(article)));
 	}
 
 }

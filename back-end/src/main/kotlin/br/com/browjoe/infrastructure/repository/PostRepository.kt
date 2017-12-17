@@ -22,9 +22,9 @@ open class PostRepository(var dsl: DSLContext) {
 		return dsl.selectFrom(table).where(table.ID.eq(id)).fetchOne();
 	}
 
-	fun save(post: PostRecord): Int {
+	fun save(post: PostRecord): PostRecord {
 		logger.info("Create={}", post);
-		return dsl.insertInto(table).set(post).execute();
+		return dsl.insertInto(table).set(post).returning().fetchOne();
 	}
 
 	fun delete(id: Int) {
