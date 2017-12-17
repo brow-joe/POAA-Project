@@ -3,7 +3,6 @@ package br.com.browjoe.application.usecase.article
 import br.com.browjoe.application.dto.ArticleDTO
 import br.com.browjoe.application.translator.ArticleTranslator
 import br.com.browjoe.infrastructure.repository.ArticleRepository
-import br.com.browjoe.jooq.data.tables.records.ArticleRecord
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
@@ -13,7 +12,7 @@ open class FindArticleByIdUseCase(var translator: ArticleTranslator, var reposit
 
 	fun execute(id: Int): ArticleDTO {
 		logger.info("Retrieve article by id={}", id);
-		return translator.translate(ArticleRecord());
+		return translator.translate(repository.findById(id));
 	}
 
 }
