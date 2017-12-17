@@ -24,7 +24,13 @@ open class ArticleRepository(var dsl: DSLContext) {
 
 	fun save(article: ArticleRecord): ArticleRecord {
 		logger.info("Create={}", article);
-		return dsl.insertInto(table).set(article).returning().fetchOne();
+		return dsl.insertInto(table,
+				table.WP_INTERNAL_ID, table.WP_PUBLISHED_TIME,
+				table.TITLE, table.SLUG
+		).values(
+				article.getWpInternalId(), article.getWpPublishedTime(),
+				article.getTitle(), article.getSlug()
+		).returning().fetchOne();
 	}
 
 	fun delete(id: Int) {

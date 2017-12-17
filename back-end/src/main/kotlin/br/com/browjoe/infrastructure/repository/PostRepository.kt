@@ -24,7 +24,17 @@ open class PostRepository(var dsl: DSLContext) {
 
 	fun save(post: PostRecord): PostRecord {
 		logger.info("Create={}", post);
-		return dsl.insertInto(table).set(post).returning().fetchOne();
+		return dsl.insertInto(table,
+				table.FB_INTERNAL_ID, table.FB_PUBLISHED_DATE,
+				table.FB_TITLE, table.FB_LINK,
+				table.FB_DESCRIPTION, table.LIKES,
+				table.SHARES, table.COMMENTS, table.CONSUMPTIONS
+		).values(
+				post.getFbInternalId(), post.getFbPublishedDate(),
+				post.getFbTitle(), post.getFbLink(),
+				post.getFbDescription(), post.getLikes(),
+				post.getShares(), post.getComments(), post.getConsumptions()
+		).returning().fetchOne();
 	}
 
 	fun delete(id: Int) {
