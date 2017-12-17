@@ -13,7 +13,7 @@ open class UpdateArticleUseCase(var translator: ArticleTranslator, var repositor
 	val logger = LoggerFactory.getLogger(UpdateArticleUseCase::class.java);
 
 	@Transactional
-	fun execute(id: Int?, article: ArticleDTO): ArticleDTO {
+	open fun execute(id: Int?, article: ArticleDTO): ArticleDTO {
 		logger.info("Update id={} article={}", id, article);
 		if (Objects.nonNull(id)) {
 			article.id = id;

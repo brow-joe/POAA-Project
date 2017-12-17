@@ -12,7 +12,7 @@ open class CreatePostUseCase(var translator: PostTranslator, var repository: Pos
 	val logger = LoggerFactory.getLogger(CreatePostUseCase::class.java);
 
 	@Transactional
-	fun execute(post: PostDTO): PostDTO {
+	open fun execute(post: PostDTO): PostDTO {
 		logger.info("Create post={}", post);
 		return translator.translate(repository.save(translator.translate(post)));
 	}

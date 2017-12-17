@@ -10,7 +10,7 @@ open class DeletePostByIdUseCase(var repository: PostRepository) {
 	val logger = LoggerFactory.getLogger(DeletePostByIdUseCase::class.java);
 
 	@Transactional
-	fun execute(id: Int) {
+	open fun execute(id: Int) {
 		logger.info("Remove post by id={}", id);
 		repository.delete(id);
 	}

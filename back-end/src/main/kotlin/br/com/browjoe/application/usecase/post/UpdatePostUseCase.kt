@@ -13,7 +13,7 @@ open class UpdatePostUseCase(var translator: PostTranslator, var repository: Pos
 	val logger = LoggerFactory.getLogger(UpdatePostUseCase::class.java);
 
 	@Transactional
-	fun execute(id: Int?, post: PostDTO): PostDTO {
+	open fun execute(id: Int?, post: PostDTO): PostDTO {
 		logger.info("Update id={} post={}", id, post);
 		if (Objects.nonNull(id)) {
 			post.id = id;

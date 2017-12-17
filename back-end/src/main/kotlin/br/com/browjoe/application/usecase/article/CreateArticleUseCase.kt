@@ -12,7 +12,7 @@ open class CreateArticleUseCase(var translator: ArticleTranslator, var repositor
 	val logger = LoggerFactory.getLogger(CreateArticleUseCase::class.java);
 
 	@Transactional
-	fun execute(article: ArticleDTO): ArticleDTO {
+	open fun execute(article: ArticleDTO): ArticleDTO {
 		logger.info("Create article={}", article);
 		return translator.translate(repository.save(translator.translate(article)));
 	}
