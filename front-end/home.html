@@ -1,0 +1,37 @@
+<div class="header clearfix">
+	<nav>
+		<ul class="nav nav-pills pull-right">
+			<li role="presentation" class="active"><a href="#!/create">Create</a></li>
+		</ul>
+		<h5 class="text-muted">New Filter</h5>
+	</nav>
+</div>
+
+<div class="row marketing">
+	<h1>Filters</h1>
+	<div class="panel panel-default">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>01/01/2017</td>
+					<td>01/01/2018</td>
+					<td>
+						<button title="To view" class="btn btn-success btn-xs" ng:click="view()">
+							<span class="glyphicon glyphicon-eye-open"></span>
+						</button>
+						<button title="Remove" class="btn btn-danger btn-xs" ng:click="remove()">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
