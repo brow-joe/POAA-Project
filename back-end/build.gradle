@@ -87,6 +87,7 @@ dependencies {
 	compile "org.springframework.boot:spring-boot-starter-hateoas"
 	compile "org.springframework.boot:spring-boot-starter-jooq"
 	compile "org.postgresql:postgresql"
+	compile "com.google.guava:guava:23.0"
 	
 	compile "org.springframework.boot:spring-boot-starter-log4j2"
 	runtime "org.springframework.boot:spring-boot-devtools"
