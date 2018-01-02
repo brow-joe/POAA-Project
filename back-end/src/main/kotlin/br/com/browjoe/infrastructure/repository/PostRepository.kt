@@ -6,6 +6,7 @@ import org.jooq.DSLContext
 import org.jooq.Result
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import java.sql.Timestamp
 
 @Service
 open class PostRepository(var dsl: DSLContext) {
@@ -15,6 +16,11 @@ open class PostRepository(var dsl: DSLContext) {
 	fun findAll(): Result<PostRecord> {
 		logger.info("Find All");
 		return dsl.selectFrom(table).fetch();
+	}
+
+	fun findAllBetween(startDate: Timestamp, endDate: Timestamp): Result<PostRecord> {
+		logger.info("Find all between published start={}, end={}", startDate, endDate);
+		return dsl.selectFrom(table).where(table.FB_PUBLISHED_DATE.between(startDate, endDate)).fetch();
 	}
 
 	fun findById(id: Int): PostRecord {

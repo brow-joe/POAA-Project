@@ -17,6 +17,13 @@ open class ArticleRepository(var dsl: DSLContext) {
 		return dsl.selectFrom(table).fetch();
 	}
 
+	fun findBySlugOrTitle(slug: String, title: String): Result<ArticleRecord> {
+		logger.info("Find by slug={} or title={}", slug, title);
+		return dsl.selectFrom(table).where(
+				table.SLUG.eq(slug)
+		).or(table.TITLE.eq(title)).fetch();
+	}
+
 	fun findById(id: Int): ArticleRecord {
 		logger.info("Find by id={}", id);
 		return dsl.selectFrom(table).where(table.ID.eq(id)).fetchOne();
