@@ -1,7 +1,7 @@
 buildscript {
 	ext {
 		jooqVersion = "3.10.0"
-		jdbcUrl = "jdbc:postgresql://localhost:5432/lamenteesmaravillosa"
+		jdbcUrl = "jdbc:postgresql://192.168.99.100:5432/lamenteesmaravillosa"
 		jdbcUser = "postgres"
 		jdbcPassword = "postgres"
 		kotlinVersion = "1.2.10"

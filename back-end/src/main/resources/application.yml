@@ -16,7 +16,7 @@ spring:
       fail-on-empty-beans: false
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/lamenteesmaravillosa
+    url: jdbc:postgresql://192.168.99.100:5432/lamenteesmaravillosa
     username: postgres
     password: postgres
     initialize: false
