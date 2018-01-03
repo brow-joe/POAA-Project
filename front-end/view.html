@@ -3,37 +3,32 @@
 	<form>
 		<div class="form-group">
 			<label>Group filter</label>
-    		<select class="form-control">
+    		<select class="form-control" ng-model="grouped_selected" ng-change="reloadScores(grouped_selected)">
     			<option>#</option>
-    			<option>Pack 1 LMEM</option>
-    			<option>Pack 2 LMEM</option>
-    			<option>Pack 3 LMEM</option>
+    			<option class="groupeds" ng-repeat="grouped in groupeds">{{grouped}}</option>
     		</select>
 		</div>
 		<div class="form-group">
 			<table class="table">
 				<thead>
 					<tr>
+						<th>Id</th>
 						<th>Article</th>
 						<th>Group</th>
 						<th>Score</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Test 1</td>
-						<td>Pack 1 LMEM</td>
-						<td>100</td>
+					<tr class="scores" ng-show="scores.length!=0" ng-repeat="data in scores">
+						<td>{{data.id}}</td>
+						<td>{{data.articleId}}</td>
+						<td>{{data.grouped}}</td>
+						<td>{{data.score}}</td>
 					</tr>
 					<tr>
-						<td>Test 2</td>
-						<td>Pack 2 LMEM</td>
-						<td>60</td>
-					</tr>
-					<tr>
-						<td>Test 3</td>
-						<td>Pack 3 LMEM</td>
-						<td>33</td>
+						<td ng-show="scores.length==0">
+							Nenhum registro a exibir                
+						</td>
 					</tr>
 				</tbody>
 			</table>
