@@ -20,6 +20,7 @@ open class JerseyConfiguration : ResourceConfig() {
 	init {
 		logger.info("Register controllers={}", controllers);
 		controllers.forEach { register(it) };
+		register(CorsFilterConfiguration::class.java);
 	}
 
 }
