@@ -44,22 +44,24 @@ open class CreateScoresByFilterService() {
 	open fun process(filter: FilterRecord) {
 		logger.info("Process scores by filter={}", filter);
 		var posts = postRepository.findAllBetween(filter.startDate, filter.endDate);
-		var scores = posts.map { Pair(it, findArticlesByPost(it)) }
-				.filter { it.second.size > 0 }
-				.map { Pair(it.first, it.second.first()) }
-				.map { createScore(it.second, filter, it.first) }
-				.groupBy { it.articleId }
-				.map { averageScores(it.value) }
-				.sortedBy { it.score }.reversed()
-				.toList();
+		if(posts.size > 0){
+			var scores = posts.map { Pair(it, findArticlesByPost(it)) }
+					.filter { it.second.size > 0 }
+					.map { Pair(it.first, it.second.first()) }
+					.map { createScore(it.second, filter, it.first) }
+					.groupBy { it.articleId }
+					.map { averageScores(it.value) }
+					.sortedBy { it.score }.reversed()
+					.toList();
 
-		scores = scores.subList(0, (scores.size * limitWeights).toInt()).toList();
-		var batch = scores.size / (groupedLimit - 1);
-		var partition = Lists.partition(scores, batch);
+			scores = scores.subList(0, (scores.size * limitWeights).toInt()).toList();
+			var batch = scores.size / (groupedLimit - 1);
+			var partition = Lists.partition(scores, batch);
 
-		for (index in 1..partition.size) {
-			var grouped = groupedPrefix + index + groupedSuffix;
-			saveScores(grouped, partition.get(index - 1));
+			for (index in 1..partition.size) {
+				var grouped = groupedPrefix + index + groupedSuffix;
+				saveScores(grouped, partition.get(index - 1));
+			}
 		}
 
 	}
