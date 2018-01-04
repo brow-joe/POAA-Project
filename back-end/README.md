@@ -1,5 +1,5 @@
 # Project-POAA
-Posts About Articles - La Mente es Maravillosa
+Publishing of Articles - La Mente es Maravillosa
 
 ## Back-end
 
