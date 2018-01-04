@@ -1,2 +1,2 @@
 # Project-POAA
-Posts Of About Articles - La Mente es Maravillosa
+Publishing of Articles - La Mente es Maravillosa
