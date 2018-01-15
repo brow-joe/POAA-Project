@@ -1,0 +1,40 @@
+<div class="col-md-10 col-md-offset-1">
+    <div class="form-inline">
+        <input type="date" required [(ngModel)]="obj.startDate" class="form-control" placeholder="Initial date">
+        <input type="date" required [(ngModel)]="obj.endDate" class="form-control" placeholder="End date">
+        <button type="button" class="btn btn-primary" (click)="createArticleService()">Create</button>
+        <br>
+        <div class="alert alert-danger" role="alert" *ngIf="this.alert">
+            <strong>Ops!</strong> Nenhum registro encontrado. Quer tentar refinar sua pesquisa?
+        </div>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Initial Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let article of this.articles">
+                    <td>{{article.id}}</td>
+                    <td>{{article.startDate}}</td>
+                    <td>{{article.endDate}}</td>
+                    <td>
+						<button title="Details" class="btn btn-success btn-xs" (click)="view(filter.id)">
+							<i class="fa fa-eye" aria-hidden="true"></i>
+						</button>
+						<button title="Delete" class="btn btn-danger btn-xs" (click)="deleteArticleService(article)">
+							<i class="fa fa-trash-o" aria-hidden="true"></i>
+						</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-info">Total:
+            <span class="badge">{{this.articles.length}}</span>
+        </p>
+    </div>
+</div>
