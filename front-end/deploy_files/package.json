@@ -1,0 +1,15 @@
+{
+  "name": "deploy_angular_ibm_bluemix",
+  "version": "1.0.0",
+  "description": "For deploy Angular 4 and IBM Bluemix",
+  "main": "index.html",
+  "scripts": {
+    "start": "node ./node_modules/http-server/bin/http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucas Costa <lbc.lucascosta@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
+}
